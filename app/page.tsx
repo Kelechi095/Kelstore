@@ -3,7 +3,6 @@ import HomeBanner from "./components/HomeBanner";
 import Wrapper from "./components/Wrapper";
 import ProductCard from "./components/products/ProductCard";
 import { products } from "./utils/products";
-import { truncateText } from "./utils/truncateText";
 
 
 export default function Home() {
