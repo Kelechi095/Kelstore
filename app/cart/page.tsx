@@ -1,8 +1,14 @@
 import React from 'react'
+import Wrapper from '../components/Wrapper'
+import CartClient from './CartClient'
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <div className='pt-8'>
+      <Wrapper>
+        <CartClient />
+      </Wrapper>
+    </div>
   )
 }
 

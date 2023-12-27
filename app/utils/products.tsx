@@ -67,11 +67,11 @@ export const products = [
         createdDate: "2023-06-26T15:53:44.483Z",
         user: {
           id: "6499b184b0e9a8c8709821d3",
-          name: "Chaoo",
+          name: "Sharon",
           email: "example1@gmail.com",
           emailVerified: null,
           image:
-            "https://lh3.googleusercontent.com/a/AAcHTtcuRLwWi1vPKaQOcJlUurlhRAIIq2LgYccE8p32=s96-c",
+            "https://m.media-amazon.com/images/M/MV5BZWFhMmE1OTQtODE5YS00ZjA5LTk5NWYtNTcxYWQwNDQwYWY0XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_.jpg",
           hashedPassword: null,
           createdAt: "2023-06-26T15:40:52.558Z",
           updatedAt: "2023-06-26T15:40:52.558Z",
@@ -91,7 +91,7 @@ export const products = [
           email: "example@gmail.com",
           emailVerified: null,
           image:
-            "https://lh3.googleusercontent.com/a/AAcHTteOiCtILLBWiAoolIW9PJH-r5825pBDl824_8LD=s96-c",
+            "https://d27o7y1r7mnbwc.cloudfront.net/media/uploads/clients/sophie-wilde/images/2023-04-11_160039_SOphie_Wilde_Main.jpg",
           hashedPassword: null,
           createdAt: "2023-05-30T08:08:53.979Z",
           updatedAt: "2023-05-30T08:08:53.979Z",
