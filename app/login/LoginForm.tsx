@@ -28,9 +28,9 @@ const LoginForm = () => {
   return (
     <>
       <Heading title="Login" />
-      <Button outline label="Continue with Google" icon={AiOutlineGoogle} onClick={() => console.log('waiting')}/>
+
       <hr className="bg-slate-300 w-full h-px" />
-      
+
       <Input
         id="email"
         label="Email"
@@ -49,11 +49,20 @@ const LoginForm = () => {
         type="password"
       />
       <Button
+        outline
+        label="Continue with Google"
+        icon={AiOutlineGoogle}
+        onClick={() => console.log("waiting")}
+      />
+      <Button
         label={isLoading ? "Loading" : "Register"}
         onClick={handleSubmit(onSubmit)}
       />
-      <p className="text-sm">Do not have an Account?{" "}
-      <Link href="/register" className="underline">Register</Link>
+      <p className="text-sm">
+        Do not have an Account?{" "}
+        <Link href="/register" className="underline">
+          Register
+        </Link>
       </p>
     </>
   );
