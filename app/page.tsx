@@ -1,4 +1,5 @@
 
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import HomeBanner from "./components/HomeBanner";
 import Wrapper from "./components/Wrapper";
 import ProductCard from "./components/products/ProductCard";

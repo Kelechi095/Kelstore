@@ -2,12 +2,14 @@ import React from 'react'
 import Wrapper from '../components/Wrapper'
 import FormWrapper from '../components/FormWrapper'
 import LoginForm from './LoginForm'
+import { getCurrentUser } from '@/actions/getCurrentUser'
 
-const Register = () => {
+const Register = async () => {
+  const currentUser = await getCurrentUser()
   return (
     <Wrapper>
         <FormWrapper>
-            <LoginForm />
+            <LoginForm currentUser={currentUser}/>
         </FormWrapper>
     </Wrapper>
   )

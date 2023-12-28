@@ -32,9 +32,6 @@ export const CartContextProvider = (props: Props) => {
   );
   const [cartTotalAmount, setCartTotalAmount] = useState(0)
 
-  console.log(cartTotalAmount)
-  console.log(cartTotalQty)
-
   useEffect(() => {
     const cartItems: any = localStorage.getItem("kelstoresCartItems");
     const cartProductsX: CartProductType[] | null = JSON.parse(cartItems);

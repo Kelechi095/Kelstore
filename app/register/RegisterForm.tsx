@@ -3,7 +3,7 @@
 import Input from "../components/inputs/Input";
 import Heading from "../components/Heading";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -11,8 +11,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { SafeUser } from "@/types";
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  currentUser: SafeUser | null
+}
+
+const RegisterForm = ({currentUser}: RegisterFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -56,6 +61,18 @@ const RegisterForm = () => {
         setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/");
+      router.refresh();
+    }
+  }, [currentUser, router]);
+
+  if(currentUser) {
+    return <p className="text-center">Logged in. Redirecting...</p>
+  }
+
   return (
     <>
       <Heading title="Sign Up" />
