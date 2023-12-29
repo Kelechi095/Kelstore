@@ -104,14 +104,15 @@ const RegisterForm = ({currentUser}: RegisterFormProps) => {
         type="password"
       />
       <Button
+        label={isLoading ? "Loading" : "Sign Up"}
+        onClick={handleSubmit(onSubmit)}
+      />
+      <Button
         outline
         label="Sign up with Google"
         icon={AiOutlineGoogle}
-        onClick={() => console.log("waiting")}
-      />
-      <Button
-        label={isLoading ? "Loading" : "Sign Up"}
-        onClick={handleSubmit(onSubmit)}
+        onClick={() => signIn('google')}
+        
       />
       <p className="text-sm">
         Already have an account?{" "}

@@ -86,14 +86,14 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
         type="password"
       />
       <Button
+        label={isLoading ? "Loading" : "Login"}
+        onClick={handleSubmit(onSubmit)}
+      />
+      <Button
         outline
         label="Continue with Google"
         icon={AiOutlineGoogle}
-        onClick={() => console.log("waiting")}
-      />
-      <Button
-        label={isLoading ? "Loading" : "Login"}
-        onClick={handleSubmit(onSubmit)}
+        onClick={() => signIn('google')}
       />
       <p className="text-sm">
         Do not have an Account?{" "}
