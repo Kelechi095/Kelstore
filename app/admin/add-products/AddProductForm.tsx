@@ -11,11 +11,12 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
 import ImageUpload from "@/app/components/inputs/ImageUpload";
-
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const AddProductForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -34,6 +35,7 @@ const AddProductForm = () => {
       price: "",
     },
   });
+
   const setCustomValue = useCallback(
     (id: string, value: any) => {
       setValue(id, value, {
@@ -45,17 +47,34 @@ const AddProductForm = () => {
     [setValue]
   );
 
+  const router = useRouter()
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    if (!data.category) {
+    setIsLoading(true);
+
+    try {
+      if (!data.category) {
+        setIsLoading(false);
+        return toast.error("Category is not selected");
+      }
+
+      if (!data.image) {
+        setIsLoading(false);
+        return toast.error("No selected image!");
+      }
+
+      await axios.post("/api/product", data);
+      toast.success("Product created");
+      reset()
+      router.refresh()
       setIsLoading(false);
-      return toast.error("Category is not selected");
+    } catch (err) {
+      toast.error("Something went wrong");
+      setIsLoading(false);
     }
 
-    if (!data.image) {
-      setIsLoading(false);
-      return toast.error("No selected image!");
-    }
     console.log(data);
+    reset();
   };
 
   const category = watch("category");
