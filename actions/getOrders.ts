@@ -1,15 +1,13 @@
 import prisma from "../app/lib/prismadb";
-import axios from "axios";
+import { getCurrentUser } from "./getCurrentUser";
 
 export async function getOrders() {
+  const currentUser = await getCurrentUser();
+
   try {
     const orders = await prisma.order.findMany({
-      include: {
-        user: true,
-      },
-
-      orderBy: {
-        dateCreated: "desc",
+      where: {
+        userId: currentUser?.id,
       },
     });
 

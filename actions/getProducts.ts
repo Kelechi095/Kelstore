@@ -1,59 +1,56 @@
 import prisma from "../app/lib/prismadb";
-import axios from 'axios'
+import axios from "axios";
 
 export interface IProductParams {
-    category?: string | null
-    searchTerm?: string | null
+  category?: string | null;
+  searchTerm?: string | null;
 }
 
 export async function getProducts(params: IProductParams) {
   try {
+    const { category, searchTerm } = params;
 
-    const {category, searchTerm} = params
+    let searchString = searchTerm;
 
-    let searchString = searchTerm
-
-    if(!searchTerm) {
-        searchString = ''
+    if (!searchTerm) {
+      searchString = "";
     }
 
-    let query: any = {}
+    let query: any = {};
 
-    if(category) {
-        query.category = category
+    if (category) {
+      query.category = category;
     }
 
     const products = await prisma.product.findMany({
-        where: {
-            ...query,
-            OR: [
-                {
-                    name: {
-                        contain: searchString,
-                        mode: 'insensitive'
-                    },
-                    description: {
-                        contain: searchString,
-                        mode: 'insensitive'
-                    }
-                }
-            ]
-        },
-        include: {
-            reviews: {
-                include: {
-                    user: true
-                },
+      where: {
+        ...query,
+        OR: [
+          {
+            name: {
+              contain: searchString,
+              mode: "insensitive",
+            },
+            description: {
+              contain: searchString,
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+    });
 
-                orderBy: {
-                    createdDate: 'desc'
-                }
-            }
-        }
-    })
+    return products;
+  } catch (error: any) {
+    return null;
+  }
+}
 
-    return products
-    
+export async function getProductsx() {
+  try {
+    const products = await prisma.product.findMany();
+
+    return products;
   } catch (error: any) {
     return null;
   }

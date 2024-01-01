@@ -8,6 +8,7 @@ import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
 import { SafeUser } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser: SafeUser | null
@@ -19,6 +20,8 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
+
+  const router = useRouter()
 
   return (
     <>

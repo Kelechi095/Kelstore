@@ -31,7 +31,7 @@ const ItemContent = ({ item }: ItemContentProps) => {
           </div>
         </Link>
         <div className="flex flex-col justify-between">
-          <Link href={`/product/${item.id}`}>{truncateText(item.name)}</Link>
+          <Link href={`/product/${item.id}`}>{truncateText(item?.name)}</Link>
           <div className="w-[70px]">
             <button
               className="text-slate-500 underline"
