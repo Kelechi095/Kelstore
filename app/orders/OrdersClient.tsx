@@ -6,7 +6,22 @@ import { formatPrice } from "../utils/formatPrice";
 import { formatDate } from "../utils/formatDate";
 import { MdPendingActions } from "react-icons/md";
 
-const OrdersClient = ({ orders }: any) => {
+type OrderType = {
+  id: string
+  userId: string
+  amount: number
+  totalItems: number
+  status: string
+  dateCreated: Date
+  products: CartProductType[]
+}
+
+
+interface OrderProps {
+  orders: OrderType[];
+}
+
+const OrdersClient = ({ orders }: OrderProps) => {
   return (
     <div>
       <Wrapper>
@@ -16,16 +31,22 @@ const OrdersClient = ({ orders }: any) => {
           <Heading title="Your orders" />
         )}
         {orders &&
-          orders.map((item: any) => (
+          orders.map((item) => (
             <div
               key={item.id}
               className="flex flex-col gap-4 border rounded-md border-slate-400 p-4 mt-3"
             >
               <div className="text-sm flex flex-col gap-1">
                 <h4 className="text-base font-semibold mb-2">Overview</h4>
-                <p><span className="font-normal">Total Items: </span> {item.totalItems}</p>
+                <p>
+                  <span className="font-normal">Total Items: </span>{" "}
+                  {item.totalItems}
+                </p>
                 <p>Amount: {formatPrice(item.amount)}</p>
-                <div className="flex items-center gap-1">Status: {item.status} <MdPendingActions className="text-green-500" /></div>
+                <div className="flex items-center gap-1">
+                  Status: {item.status}{" "}
+                  <MdPendingActions className="text-green-500" />
+                </div>
                 <p>Date Created: {formatDate(item.dateCreated)}</p>
               </div>
               <hr />

@@ -1,9 +1,23 @@
-import React from 'react'
+import { getCurrentUser } from "@/actions/getCurrentUser"
+import Wrapper from "../components/Wrapper"
+import ManageClient from "./ManageProductsClient"
+import { getProducts } from "@/actions/getProducts"
+import NotAllowed from "../components/NotAllowed"
 
-const Admin = () => {
+const Admin = async () => {
+
+  const products = await getProducts({category: null})
+  const currentUser = await getCurrentUser()
+
+  if (!currentUser || currentUser.role !== "ADMIN") {
+    return <NotAllowed title="Oops! Access Denied" />;
+  }
+
   return (
     <div className='pt-8'>
-        Admin Page
+        <Wrapper>
+          <ManageClient products={products}/>
+        </Wrapper>
     </div>
   )
 }

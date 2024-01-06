@@ -20,6 +20,7 @@ model User {
 
   accounts Account[]
   orders   Order[]
+  reviews  Reviews[]
 }
 
 model Account {
@@ -42,7 +43,7 @@ model Account {
 }
 
 model Product {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
   price       Float
@@ -50,10 +51,24 @@ model Product {
   category    String
   inStock     Boolean
   image       String
+  reviews Reviews[]
+}
+
+model Reviews {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String @db.ObjectId
+  productId     String @db.ObjectId
+  review        String
+  reviewerImage String?
+  reviewerName  String?
+  rating      Int
+  dateCreated DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Order {
-  id          String          @id @default(auto()) @map("_id") @db.ObjectId
+  id          String            @id @default(auto()) @map("_id") @db.ObjectId
   userId      String            @db.ObjectId
   amount      Float
   totalItems  Int
@@ -71,6 +86,7 @@ type CartProductType {
   category    String
   brand       String
   image       String
+  inStock     Boolean
   quantity    Int
   price       Float
 }

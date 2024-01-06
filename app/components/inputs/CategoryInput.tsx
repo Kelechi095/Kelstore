@@ -24,7 +24,7 @@ const CategoryInput = ({
     `}
     >
       <Icon size={30} />
-      <div className="font-medium">{label}</div>
+      <p className="font-medium text-xs md:text-sm">{label}</p>
     </div>
   );
 };

@@ -20,6 +20,7 @@ const CartClient = () => {
 
   const router = useRouter();
 
+
   const handleCheckOut = async () => {
     setIsLoading(true);
     try {
@@ -62,13 +63,8 @@ const CartClient = () => {
   return (
     <div>
       <Heading title="Shopping Cart" center />
-      <div className="grid grid-cols-5 text-xs gap-4 pb-2 items-center mt-8">
-        <div className="col-span-2 justify-self-start">PRODUCT</div>
-        <div className="justify-self-center">PRICE</div>
-        <div className="justify-self-center">QUANTITY</div>
-        <div className="justify-self-end">TOTAL</div>
-      </div>
-      <div>
+      
+      <div  className="mt-4">
         {cartProducts &&
           cartProducts.map((item) => (
             <div key={item.id}>
@@ -76,23 +72,20 @@ const CartClient = () => {
             </div>
           ))}
       </div>
-      <div className="border-t-[1.5px] border-slate-200 py-4 flex justify-between gap-4">
+      <div className="border-t-[1.5px] border-slate-200 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <Button
             label="Clear Cart"
-            small
             outline
             onClick={() => handleClearCart()}
           />
         </div>
         <div className="text-sm flex flex-col gap-1 items-start">
-          <div className="flex justify-between w-full text-base font-semibold">
-            <span>Subtotal</span>
+          <div className="flex justify-between w-full text-base font-semibold mb-3">
+            <span>Subtotal: </span>
             <span>{formatPrice(cartTotalAmount)}</span>
           </div>
-          <p className="text-slate-500">
-            Taxes and shipping calculate at checkout
-          </p>
+          
           <Button label={isLoading ? "Loading" : "Checkout"} onClick={handleCheckOut} />
           <Link
             href={"/"}

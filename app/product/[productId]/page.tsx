@@ -1,27 +1,24 @@
 import React from "react";
 import Wrapper from "@/app/components/Wrapper";
 import ProductDetails from "@/app/components/products/ProductDetails";
-import ListRating from "@/app/components/products/ListRating";
-import { getProductsx } from "@/actions/getProducts";
+import { getProducts} from "@/actions/getProducts";
 
 interface IParams {
-  productId?: string;
+  productId?: any;
 }
 
 const Product = async ({ params }: { params: IParams }) => {
 
-  const products = await getProductsx()
+  const products = await getProducts({category: null})
 
-  const product = products?.find((item) => item.id === params.productId);
+
+  const product:any = products?.find((item) => item.id === params.productId);
+
 
   return (
     <div>
       <Wrapper>
-        <ProductDetails product={product} />
-        <div className="flex flex-col mt-20 gap-4">
-          <div>Add Rating</div>
-          {/* <ListRating product={product} /> */}
-        </div>
+        <ProductDetails product={product}/>
       </Wrapper>
     </div>
   );

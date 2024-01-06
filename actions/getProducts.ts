@@ -1,5 +1,4 @@
 import prisma from "../app/lib/prismadb";
-import axios from "axios";
 
 export interface IProductParams {
   category?: string | null;
@@ -28,11 +27,11 @@ export async function getProducts(params: IProductParams) {
         OR: [
           {
             name: {
-              contain: searchString,
+              contains: searchString,
               mode: "insensitive",
             },
             description: {
-              contain: searchString,
+              contains: searchString,
               mode: "insensitive",
             },
           },

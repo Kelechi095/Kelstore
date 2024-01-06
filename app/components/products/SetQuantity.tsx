@@ -1,6 +1,8 @@
 "use client";
 
 import { CartProductType } from "./ProductDetails";
+import { TbSquareChevronLeft } from "react-icons/tb";
+import { TbSquareChevronRight } from "react-icons/tb";
 
 interface SetQuantityProps {
   cartCounter?: boolean;
@@ -9,7 +11,6 @@ interface SetQuantityProps {
   handleQtyDecrease: () => void;
 }
 
-const btnStyles = "border-[1.2px] border-slate-300 px-2 roundex";
 
 const SetQuantity = ({
   cartProduct,
@@ -18,12 +19,12 @@ const SetQuantity = ({
   handleQtyIncrease,
 }: SetQuantityProps) => {
   return (
-    <div className="flex gap-8 items-center">
+    <div className="flex mt-2 gap-8 items-center">
       {cartCounter ? null : <div className="font-semibold">QUANTITY: </div>}
       <div className="flex gap-4 items-center text-base">
-        <button className={btnStyles} onClick={handleQtyDecrease}>-</button>
+        <TbSquareChevronLeft size={24} onClick={handleQtyDecrease} className="cursor-pointer hover:text-rose-500"/>
         <div>{cartProduct.quantity}</div>
-        <button className={btnStyles} onClick={handleQtyIncrease}>+</button>
+        <TbSquareChevronRight size={24} onClick={handleQtyIncrease} className="cursor-pointer hover:text-lime-500"/>
       </div>
     </div>
   );

@@ -1,19 +1,39 @@
-
-import { getCurrentUser } from "@/actions/getCurrentUser";
 import HomeBanner from "./components/HomeBanner";
 import Wrapper from "./components/Wrapper";
 import ProductCard from "./components/products/ProductCard";
-import { getProducts } from "@/actions/getProducts";
-import { getProductsx } from "@/actions/getProducts";
+import { IProductParams, getProducts } from "@/actions/getProducts";
+import NotAllowed from "./components/NotAllowed";
+import { getReviewsById } from "@/actions/getReviewsById";
+
+interface HomeProps {
+  searchParams: IProductParams;
+}
+
+export default async function Home({searchParams}: HomeProps) {
+  const products = await getProducts(searchParams);
 
 
-export default async function Home() {
-  
- const params = {category: 'all'}
+  if (products?.length === 0) {
+    return <NotAllowed title="No products found" />;
+  }
 
-  const products = await getProductsx()
+  function shuffleArray(array: any) {
+    for (let i = array?.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
 
-  
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+
+    return array;
+  }
+
+  const shuffleProducts = shuffleArray(products)
+
+  const getReviews = async(val: string) =>  {
+    return await getReviewsById(val)
+  }
 
   return (
     <div className="p-8">
@@ -21,14 +41,14 @@ export default async function Home() {
         <div>
           <HomeBanner />
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl-grid-cols-5 2xl:grid-cols-6 gap-8">
-          {products?.map((product: any) => (
-            <div key={product.id}>
-              <ProductCard data={product}/>
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl-grid-cols-5 2xl:grid-cols-6 gap-8">
+          {shuffleProducts?.map((product: any) => {
+           return <div key={product.id}>
+              <ProductCard data={product} reviews={getReviews(product.id)}/>
             </div>
-          ))}
+            })}
         </div>
       </Wrapper>
     </div>
-  )
+  );
 }

@@ -16,7 +16,7 @@ const AdminNavItem = ({selected, icon: Icon, label}: AdminNavItemProps) => {
     ${selected ? 'border-b-slate-800 text-slate-800' : 'border-transparent text-slate-500'}
     `}>
         <Icon size={20}/>
-        <div className='font-medium text-sm text-center break-normal'>{label}</div>
+        <div className='font-medium text-xs md:text-sm text-center break-normal'>{label}</div>
     </div>
   )
 }
