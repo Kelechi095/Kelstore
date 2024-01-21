@@ -44,7 +44,7 @@ const SearchBar = () => {
         placeholder="Search products"
       />
       <button
-        className="bg-slate-700 hover:opacity-80 text-white p-2 rounded-r-md"
+        className="bg-rose-400 hover:opacity-80 text-white p-2 rounded-r-md"
         onClick={handleSubmit(onSubmit)}
       >
         Search

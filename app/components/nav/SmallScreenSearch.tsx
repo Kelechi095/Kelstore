@@ -7,10 +7,10 @@ const SmallScreenSearch = () => {
       <form className="mx-auto flex">
         <input
           type="text"
-          className="outline-none w-full px-2 py-1 border border-slate-700"
+          className="outline-none w-full px-2 py-1 border border-slate-300"
           placeholder="Search Product"
         />
-        <button className="bg-slate-600 text-white px-2">Search</button>
+        <button className="bg-rose-400 text-white px-2 rounded">Search</button>
       </form>
     </div>
   );

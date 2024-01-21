@@ -21,11 +21,11 @@ const ItemContent = ({ item }: ItemContentProps) => {
   } = useCart();
 
   return (
-    <div className=" text-xs md:text-sm border-t-[1.5px] border-slate-200 py-4 items-center">
+    <div className=" text-xs md:text-sm border-t-[1.5px] border-slate-200 py-4">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-1 md:gap-2">
+        <div className="flex items-center justify-between gap-1 md:gap-2 ">
           <Link href={`/product/${item.id}`}>
-            <div className="relative w-[100px] aspect-square ">
+            <div className="relative w-[100px]">
               <Image
                 src={item.image}
                 alt={item.name}
@@ -36,15 +36,15 @@ const ItemContent = ({ item }: ItemContentProps) => {
               />
             </div>
           </Link>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between md:w-[190px]">
             <Link
               href={`/product/${item.id}`}
-              className="mb-1 font-semibold text-[15px] md:text-base"
+              className="mb-1 font-semibold text-[14px] md:text-sm"
             >
               {truncateText(item?.name)}
             </Link>
             <div className="w-[70px]">
-              <div className="justify-self-center font-semibold">
+              <div className="justify-self-center">
                 {formatPrice(item.price)}
               </div>
             </div>

@@ -13,6 +13,7 @@ interface CategoryProps {
 
 const Category = ({ label, icon: Icon, selected }: CategoryProps) => {
   const router = useRouter();
+  
   const params = useSearchParams();
 
   const handleClick = useCallback(() => {
@@ -55,8 +56,8 @@ const Category = ({ label, icon: Icon, selected }: CategoryProps) => {
     }
     `}
     >
-      <Icon size={18} />
-      <div className="font-medium text-sm md:text-sm">{label}</div>
+      <Icon size={20} className="hidden md:block"/>
+      <div className="font-medium text-xs md:text-sm">{label}</div>
     </div>
   );
 };

@@ -62,7 +62,7 @@ const CartClient = () => {
 
   return (
     <div>
-      <Heading title="Shopping Cart" center />
+      <Heading title="Shopping Cart" center theme />
       
       <div  className="mt-4">
         {cartProducts &&
@@ -81,8 +81,8 @@ const CartClient = () => {
           />
         </div>
         <div className="text-sm flex flex-col gap-1 items-start">
-          <div className="flex justify-between w-full text-base font-semibold mb-3">
-            <span>Subtotal: </span>
+          <div className="flex justify-between gap-2 w-full text-base font-semibold mb-3">
+            <span>Subtotal:</span>
             <span>{formatPrice(cartTotalAmount)}</span>
           </div>
           

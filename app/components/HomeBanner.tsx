@@ -1,22 +1,68 @@
-import Image from 'next/image'
-import React from 'react'
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { bannerTexts } from "../utils/bannerTexts";
 
 const HomeBanner = () => {
-  return (
-    <div className='relative bg-gradient-to-r from-sky-500 to-sky-700 mb-8'>
-        <div className='mx-auto px-8 py-12 flex flex-col gap-2 md:flex-row items-center justify-evenly'>
-            <div className='mb-8 md:mb-0 text-center'>
-                <h1 className='text-4xl md:text-6xl font-bold text-white mb-4'>Shop Now</h1>
-                <p className='text-lg md:text-xl text-white mb-2'>Enjoy discounts on selected items</p>
-                <p className='text-2xl md:text-5xl text-yellow-400 font-bold'>Get 50% OFF</p>
-            </div>
-            <div className='w-1/3 relative aspect-video'>
-                <Image src='/banner-image.png' fill
-                alt='Banner Image' className='object-contain' />
-            </div>
-        </div>
-    </div>
-  )
-}
+  const [bannerIndex, setBannerIndex] = useState(0);
 
-export default HomeBanner
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (bannerIndex < 2) {
+        setBannerIndex((prev) => prev + 1);
+      } else {
+        setBannerIndex(0);
+      }
+    }, 10000);
+    return () => {
+      clearInterval(id);
+    };
+  }, [bannerIndex]);
+
+  return (
+    <div
+      className=" mx-auto grid grid-cols-2 mb-8 rounded-md overflow-hidden
+    "
+    >
+      <div className="h-full md:h-[300px]">
+        <Image
+          src={
+            bannerIndex === 0
+              ? "/shop2.jpg"
+              : bannerIndex === 1
+              ? "/shop4.jpg"
+              : "/shop1.jpg"
+          }
+          alt="banner"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <div
+        className={`mb-8 md:mb-0 flex text-center p-4 flex-col items-center justify-center h-full
+        ${
+          bannerIndex === 0
+            ? "bg-pink-100"
+            : bannerIndex === 1
+            ? "bg-sky-100"
+            : "bg-gray-100"
+        }
+    
+    `}
+      >
+        <h1 className="text-lg md:text-3xl font-semibold mb-4 font-sans text-slate-400">
+          {bannerTexts[bannerIndex].text1}
+        </h1>
+        
+        <p className="text-xl md:text-4xl font-semibold text-rose-500">
+          {bannerTexts[bannerIndex].text2}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default HomeBanner;
