@@ -1,10 +1,9 @@
-import HomeBanner from "./components/HomeBanner";
+
 import Wrapper from "./components/Wrapper";
 import ProductCard from "./components/products/ProductCard";
 import { IProductParams, getProducts } from "@/actions/getProducts";
 import NotAllowed from "./components/NotAllowed";
 import { getReviewsById } from "@/actions/getReviewsById";
-import Heading from "./components/Heading";
 
 interface HomeProps {
   searchParams: IProductParams;
@@ -18,7 +17,6 @@ export default async function Home({searchParams}: HomeProps) {
     return <NotAllowed title="No products found" />;
   }
 
-  //Fisher-Yates algorithm to shuffle to array of products on every refresh
   function shuffleArray(array: any) {
     for (let i = array?.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

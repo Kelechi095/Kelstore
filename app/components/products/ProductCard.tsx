@@ -10,6 +10,7 @@ import axios from "axios";
 
 interface ProductCardProps {
   data: any;
+  reviews: any
 }
 
 const ProductCard = ({ data }: ProductCardProps) => {
