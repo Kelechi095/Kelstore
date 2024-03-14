@@ -1,11 +1,6 @@
 import AdminNav from "../components/admin/AdminNav"
 
 
-export const metaData = {
-    title: "Kelstores Admin",
-    description: " Kelstores Admin Dashboard"
-}
-
 interface AdminLayoutProps {
     children: React.ReactNode
 }
