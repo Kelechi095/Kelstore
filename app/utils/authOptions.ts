@@ -3,6 +3,7 @@ import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
 import prisma from '../lib/prismadb'
 
 export const authOptions: AuthOptions = {
@@ -32,7 +33,7 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user.hashedPassword) {
-          throw new Error("No user found");
+          throw new Error("User not found");
         }
 
         const passwordMatch = await bcrypt.compare(
