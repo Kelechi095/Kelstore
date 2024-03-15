@@ -2,7 +2,8 @@
 const nextConfig = {
     images: {
         domains: ["firebasestorage.googleapis.com", "ng.jumia.is", "lh3.googleusercontent.com", "res.cloudinary.com"],
-    }
+    },
+    missingSuspenseWithCSRBailout: false
 }
 
 module.exports = nextConfig
