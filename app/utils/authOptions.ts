@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user.hashedPassword) {
-          throw new Error("User not found");
+          throw new Error("No user found");
         }
 
         const passwordMatch = await bcrypt.compare(
