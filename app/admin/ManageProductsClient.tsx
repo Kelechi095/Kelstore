@@ -133,25 +133,23 @@ const ManageProductsClient = ({ products }: ManageProductsClientProps) => {
   );
 
   return (
-    <Suspense>
-      <div className="max-w-[1150px] m-auto text-xl">
-        <div className="mb-4 mt-8">
-          <Heading title="Manage Products" />
-        </div>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
+    <div className="max-w-[1150px] m-auto text-xl">
+      <div className="mb-4 mt-8">
+        <Heading title="Manage Products" />
       </div>
-    </Suspense>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+    </div>
   );
 };
 

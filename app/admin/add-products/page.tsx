@@ -13,7 +13,6 @@ const AddProducts = async () => {
   }
 
   return (
-    <Suspense>
       <div className="p-1">
         <Wrapper>
           <FormWrapper>
@@ -21,7 +20,6 @@ const AddProducts = async () => {
           </FormWrapper>
         </Wrapper>
       </div>
-    </Suspense>
   );
 };
 

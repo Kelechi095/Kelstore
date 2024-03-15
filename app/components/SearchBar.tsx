@@ -36,7 +36,7 @@ const SearchBar = () => {
   };
 
   return (
-    <Suspense>
+    
       <div className="flex items-center">
         <input
           {...register("searchTerm")}
@@ -52,7 +52,7 @@ const SearchBar = () => {
           Search
         </button>
       </div>
-    </Suspense>
+    
   );
 };
 

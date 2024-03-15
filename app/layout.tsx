@@ -6,6 +6,8 @@ import Footer from "./components/footer/Footer";
 import CartProvider from "./providers/CartProvider";
 import ToasterProvider from "./providers/ToastProvider";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import Loading from "./loading";
+import { Suspense } from "react";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -19,9 +21,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  const currentUser = await getCurrentUser()
-
+  const currentUser = await getCurrentUser();
 
   return (
     <html lang="en">
@@ -30,8 +30,10 @@ export default async function RootLayout({
         <CartProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-grow">{children}</main>
-            <Footer />
+            <Suspense fallback={<Loading />}>
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </Suspense>
           </div>
         </CartProvider>
       </body>

@@ -1,17 +1,18 @@
-import AdminNav from "../components/admin/AdminNav"
-
+import { Suspense } from "react";
+import AdminNav from "../components/admin/AdminNav";
+import Loading from "../loading";
 
 interface AdminLayoutProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const AdminLayout = ({children}: AdminLayoutProps) => {
+const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div>
-        <AdminNav />
-        {children}
+      <AdminNav />
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default AdminLayout
+export default AdminLayout;

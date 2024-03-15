@@ -14,13 +14,11 @@ const Admin = async () => {
   }
 
   return (
-    <Suspense>
       <div className="pt-8">
         <Wrapper>
           <ManageClient products={products} />
         </Wrapper>
       </div>
-    </Suspense>
   );
 };
 
