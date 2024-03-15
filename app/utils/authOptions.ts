@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
   },
 
   
-  secret: 'djdjdiiejdjiej38u383u38jdjd83839393',
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
