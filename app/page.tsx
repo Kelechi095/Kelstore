@@ -1,17 +1,16 @@
-
 import Wrapper from "./components/Wrapper";
 import ProductCard from "./components/products/ProductCard";
 import { IProductParams, getProducts } from "@/actions/getProducts";
 import NotAllowed from "./components/NotAllowed";
 import { getReviewsById } from "@/actions/getReviewsById";
+import { Suspense } from "react";
 
 interface HomeProps {
   searchParams: IProductParams;
 }
 
-export default async function Home({searchParams}: HomeProps) {
+export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams);
-
 
   if (products?.length === 0) {
     return <NotAllowed title="No products found" />;
@@ -29,24 +28,30 @@ export default async function Home({searchParams}: HomeProps) {
     return array;
   }
 
-  const shuffleProducts = shuffleArray(products)
+  const shuffleProducts = shuffleArray(products);
 
-  const getReviews = async(val: string) =>  {
-    return await getReviewsById(val)
-  }
+  const getReviews = async (val: string) => {
+    return await getReviewsById(val);
+  };
 
   return (
     <div className="p-8">
       <Wrapper>
-        
-        <hr className="mb-4"/>
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl-grid-cols-5 2xl:grid-cols-6 gap-8">
-          {shuffleProducts?.map((product: any) => {
-           return <div key={product.id}>
-              <ProductCard data={product} reviews={getReviews(product.id)}/>
-            </div>
+        <Suspense>
+          <hr className="mb-4" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl-grid-cols-5 2xl:grid-cols-6 gap-8">
+            {shuffleProducts?.map((product: any) => {
+              return (
+                <div key={product.id}>
+                  <ProductCard
+                    data={product}
+                    reviews={getReviews(product.id)}
+                  />
+                </div>
+              );
             })}
-        </div>
+          </div>
+        </Suspense>
       </Wrapper>
     </div>
   );
