@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import qs from "query-string";
+import { Suspense } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 const SearchBar = () => {
@@ -35,21 +36,23 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center">
-      <input
-        {...register("searchTerm")}
-        className="p-2 border border-gray-300 rounded-l-md focus: outline-none focus:border-[0.5px] focus:border-slate-500 w-80"
-        autoComplete="off"
-        type="text"
-        placeholder="Search products"
-      />
-      <button
-        className="bg-rose-400 hover:opacity-80 text-white p-2 rounded-r-md"
-        onClick={handleSubmit(onSubmit)}
-      >
-        Search
-      </button>
-    </div>
+    <Suspense>
+      <div className="flex items-center">
+        <input
+          {...register("searchTerm")}
+          className="p-2 border border-gray-300 rounded-l-md focus: outline-none focus:border-[0.5px] focus:border-slate-500 w-80"
+          autoComplete="off"
+          type="text"
+          placeholder="Search products"
+        />
+        <button
+          className="bg-rose-400 hover:opacity-80 text-white p-2 rounded-r-md"
+          onClick={handleSubmit(onSubmit)}
+        >
+          Search
+        </button>
+      </div>
+    </Suspense>
   );
 };
 

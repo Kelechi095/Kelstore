@@ -37,8 +37,8 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <div className="p-8">
       <Wrapper>
+        <hr className="mb-4" />
         <Suspense>
-          <hr className="mb-4" />
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl-grid-cols-5 2xl:grid-cols-6 gap-8">
             {shuffleProducts?.map((product: any) => {
               return (

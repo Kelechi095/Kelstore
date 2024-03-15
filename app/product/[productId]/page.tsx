@@ -1,24 +1,23 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Wrapper from "@/app/components/Wrapper";
 import ProductDetails from "@/app/components/products/ProductDetails";
-import { getProducts} from "@/actions/getProducts";
+import { getProducts } from "@/actions/getProducts";
 
 interface IParams {
   productId?: any;
 }
 
 const Product = async ({ params }: { params: IParams }) => {
+  const products = await getProducts({ category: null });
 
-  const products = await getProducts({category: null})
-
-
-  const product:any = products?.find((item) => item.id === params.productId);
-
+  const product: any = products?.find((item) => item.id === params.productId);
 
   return (
     <div>
       <Wrapper>
-        <ProductDetails product={product}/>
+        <Suspense>
+          <ProductDetails product={product} />
+        </Suspense>
       </Wrapper>
     </div>
   );
