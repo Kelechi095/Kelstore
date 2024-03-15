@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Wrapper from "@/app/components/Wrapper";
 import FormWrapper from "@/app/components/FormWrapper";
 import AddProductForm from "./AddProductForm";
@@ -13,13 +13,15 @@ const AddProducts = async () => {
   }
 
   return (
-    <div className="p-1">
-      <Wrapper>
-        <FormWrapper>
-          <AddProductForm />
-        </FormWrapper>
-      </Wrapper>
-    </div>
+    <Suspense>
+      <div className="p-1">
+        <Wrapper>
+          <FormWrapper>
+            <AddProductForm />
+          </FormWrapper>
+        </Wrapper>
+      </div>
+    </Suspense>
   );
 };
 

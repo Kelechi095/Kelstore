@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "prisma/prisma-client";
-import React, { useCallback } from "react";
+import React, { Suspense, useCallback } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { formatPrice } from "../utils/formatPrice";
 import Heading from "../components/Heading";
@@ -89,7 +89,10 @@ const ManageProductsClient = ({ products }: ManageProductsClientProps) => {
                 handleToggleStock(params.row.id, params.row.inStock)
               }
             />
-            <ActionBtn icon={MdDelete} onClick={() => handleDeleteStock(params.row.id)} />
+            <ActionBtn
+              icon={MdDelete}
+              onClick={() => handleDeleteStock(params.row.id)}
+            />
           </div>
         );
       },
@@ -130,23 +133,25 @@ const ManageProductsClient = ({ products }: ManageProductsClientProps) => {
   );
 
   return (
-    <div className="max-w-[1150px] m-auto text-xl">
-      <div className="mb-4 mt-8">
-        <Heading title="Manage Products" />
+    <Suspense>
+      <div className="max-w-[1150px] m-auto text-xl">
+        <div className="mb-4 mt-8">
+          <Heading title="Manage Products" />
+        </div>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
       </div>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </div>
+    </Suspense>
   );
 };
 
