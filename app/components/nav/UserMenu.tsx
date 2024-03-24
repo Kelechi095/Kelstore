@@ -40,9 +40,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 <Link href="/orders">
                   <MenuItem onClick={toggleOpen}>Your Orders</MenuItem>
                 </Link>
-                <Link href="/admin">
+                {currentUser.role === "ADMIN" && <Link href="/admin">
                   <MenuItem onClick={toggleOpen}>Admin</MenuItem>
-                </Link>
+                </Link>}
                 <MenuItem
                   onClick={() => {
                     toggleOpen();

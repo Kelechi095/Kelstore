@@ -10,9 +10,14 @@ import { formatPrice } from "../utils/formatPrice";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import { SafeUser } from "@/types";
 
-const CartClient = () => {
+interface CartClientProps {
+  currentUser: SafeUser | null;
+}
+
+const CartClient = ({ currentUser }: CartClientProps) => {
   const { cartProducts, handleClearCart, cartTotalQty, cartTotalAmount } =
     useCart();
 
@@ -20,26 +25,29 @@ const CartClient = () => {
 
   const router = useRouter();
 
-
   const handleCheckOut = async () => {
-    setIsLoading(true);
-    try {
-      const order = {
-        products: cartProducts,
-        amount: cartTotalAmount,
-        totalItems: cartTotalQty,
-        status: "Pending",
-      };
+    if (!currentUser) {
+      router.push("/login");
+    } else {
+      setIsLoading(true);
+      try {
+        const order = {
+          products: cartProducts,
+          amount: cartTotalAmount,
+          totalItems: cartTotalQty,
+          status: "Pending",
+        };
 
-      await axios.post("/api/orders", order);
-      router.push("/orders");
-      toast.success("Order added");
-      handleClearCart()
-      setIsLoading(false)
-      router.refresh();
-    } catch (err) {
-      toast.error("Something went wrong");
-      setIsLoading(false)
+        await axios.post("/api/orders", order);
+        router.push("/orders");
+        toast.success("Order added");
+        handleClearCart();
+        setIsLoading(false);
+        router.refresh();
+      } catch (err) {
+        toast.error("Something went wrong");
+        setIsLoading(false);
+      }
     }
   };
 
@@ -63,8 +71,8 @@ const CartClient = () => {
   return (
     <div>
       <Heading title="Shopping Cart" center theme />
-      
-      <div  className="mt-4">
+
+      <div className="mt-4">
         {cartProducts &&
           cartProducts.map((item) => (
             <div key={item.id}>
@@ -85,8 +93,11 @@ const CartClient = () => {
             <span>Subtotal:</span>
             <span>{formatPrice(cartTotalAmount)}</span>
           </div>
-          
-          <Button label={isLoading ? "Loading" : "Checkout"} onClick={handleCheckOut} />
+
+          <Button
+            label={isLoading ? "Loading" : "Checkout"}
+            onClick={handleCheckOut}
+          />
           <Link
             href={"/"}
             className="text-slate-500 flex items-center gap-1 mt-2"

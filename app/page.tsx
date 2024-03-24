@@ -12,6 +12,9 @@ interface HomeProps {
 export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams);
 
+  console.log(products)
+
+
   if (products?.length === 0) {
     return <NotAllowed title="No products found" />;
   }
